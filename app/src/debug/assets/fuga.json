@@ -1,0 +1,153 @@
+// http://qiita.com/kazuhiro1128/items/e8297557682c7f884edb
+// http://weather.livedoor.com/forecast/webservice/json/v1?city=200010
+{
+  "pinpointLocations": [
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2020100",
+      "name": "長野市"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2020700",
+      "name": "須坂市"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2021100",
+      "name": "中野市"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2021200",
+      "name": "大町市"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2021300",
+      "name": "飯山市"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2021800",
+      "name": "千曲市"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2048100",
+      "name": "池田町"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2048200",
+      "name": "松川村"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2048500",
+      "name": "白馬村"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2048600",
+      "name": "小谷村"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2052100",
+      "name": "坂城町"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2054100",
+      "name": "小布施町"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2054300",
+      "name": "高山村"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2056100",
+      "name": "山ノ内町"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2056200",
+      "name": "木島平村"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2056300",
+      "name": "野沢温泉村"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2058300",
+      "name": "信濃町"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2058800",
+      "name": "小川村"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2059000",
+      "name": "飯綱町"
+    },
+    {
+      "link": "http://weather.livedoor.com/area/forecast/2060200",
+      "name": "栄村"
+    }
+  ],
+  "link": "http://weather.livedoor.com/area/forecast/200010",
+  "forecasts": [
+    {
+      "dateLabel": "今日",
+      "telop": "晴れ",
+      "date": "2015-11-06",
+      "temperature": {
+        "min": {
+          "celsius": "4",
+          "fahrenheit": "39.2"
+        },
+        "max": {
+          "celsius": "20",
+          "fahrenheit": "68.0"
+        }
+      },
+      "image": {
+        "width": 50,
+        "url": "http://weather.livedoor.com/img/icon/1.gif",
+        "title": "晴れ",
+        "height": 31
+      }
+    },
+    {
+      "dateLabel": "明日",
+      "telop": "曇時々晴",
+      "date": "2015-11-07",
+      "temperature": {
+        "min": null,
+        "max": null
+      },
+      "image": {
+        "width": 50,
+        "url": "http://weather.livedoor.com/img/icon/9.gif",
+        "title": "曇時々晴",
+        "height": 31
+      }
+    }
+  ],
+  "location": {
+    "city": "長野",
+    "area": "信越・北陸",
+    "prefecture": "長野県"
+  },
+  "publicTime": "2015-11-05T17:00:00+0900",
+  "copyright": {
+    "provider": [
+      {
+        "link": "http://tenki.jp/",
+        "name": "日本気象協会"
+      }
+    ],
+    "link": "http://weather.livedoor.com/",
+    "title": "(C) LINE Corporation",
+    "image": {
+      "width": 118,
+      "link": "http://weather.livedoor.com/",
+      "url": "http://weather.livedoor.com/img/cmn/livedoor.gif",
+      "title": "livedoor 天気情報",
+      "height": 26
+    }
+  },
+  "title": "長野県 長野 の天気",
+  "description": {
+    "text": " 日本付近は、広く高気圧に覆われています。\n\n 長野県内は、晴れまたは薄曇りとなっています。\n\n 5日は、高気圧に覆われる見込みです。\n このため、おおむね晴れるでしょう。\n\n 6日は、日中は高気圧に覆われますが、気圧の谷や湿った空気の影響を受\nける見込みです。\n このため、北部では、晴れで夜は曇りとなるでしょう。中部と南部では、\n晴れで朝晩は曇りとなるでしょう。\n\n<天気変化等の留意点>\n 5日18時から6日18時までの24時間に予想される降水量は、多い所\nで、北部で0ミリ、中部で0ミリ、南部で0ミリの見込みです。",
+    "publicTime": "2015-11-05T16:39:00+0900"
+  }
+}

@@ -1,0 +1,66 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        //classpath 'com.android.tools.build:gradle:2.3.+'
+        classpath 'com.android.tools.build:gradle:2.2.+'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+        classpath "io.realm:realm-gradle-plugin:3.1.2"
+        classpath 'com.github.gfx.ribbonizer:plugin:1.0.0'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+
+    //-XlintのワーニングをASのMessageタブに表示させる
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            if(it.source.asPath.indexOf("generated") != -1){
+                options.compilerArgs << "-Xmaxerrs" << "500"
+            }
+            else{
+                options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+            }
+        }
+    }
+
+    //pgradle.sh/pgradle.bat用
+    //こう書かないとFlavorとか使っている場合 gradlew tasks で一覧に表示されない
+    task build_tasks << {
+        tasks.each{task->
+            if(task.group == "build"){
+                println(task.name)
+            }
+        }
+    }
+
+    tasks.whenTaskAdded { task ->
+        //[TODO] Test系のtaskを無効にする
+        if (task.name.indexOf("Test")!=-1) {
+            task.enabled = false
+        }
+
+        if (task.name.indexOf("assemble")!=-1) {
+            task.group = "build"
+        }
+
+        if (task.name.indexOf("crashlytics")!=-1) {
+            task.group = "build"
+        }
+
+        if (task.name.indexOf("clean")!=-1) {
+            task.group = "build"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

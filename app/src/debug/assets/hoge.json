@@ -1,0 +1,31 @@
+// see http://qiita.com/oqrusk/items/bba05b5aa1c3d711ad41
+{
+  "items": [
+    {
+      "id": "0001",
+      "target": {
+        "name":"車",
+        "color":"red",
+        "prices":{
+          "default":1000
+        }
+      },
+      "updated": "2015/01/01"
+    },
+    {
+      "id": "0002",
+      "target": {
+        "name":"自転車",
+        "color":"blue",
+        "prices":{
+          "default":1000,
+          "sale":800  //データが可変
+        }
+      },
+      "updated": "2015/01/02"
+    }
+  ],
+  "meta": "hoge",
+  "data": "huga",
+  "timestamp": "2015/05/08 17:26:55"
+}
