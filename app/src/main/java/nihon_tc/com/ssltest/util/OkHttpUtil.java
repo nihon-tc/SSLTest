@@ -3,9 +3,13 @@ package nihon_tc.com.ssltest.util;
 import android.content.Context;
 import nihon_tc.com.ssltest.application.HogeApplication;
 import okhttp3.Cache;
+import okhttp3.ConnectionSpec;
 import okhttp3.OkHttpClient;
+import okhttp3.TlsVersion;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -39,7 +43,22 @@ public class OkHttpUtil {
         Cache cache = new Cache(cachedFile, MAX_CACHE_SIZE);
         builder.cache(cache);
 
+//== TODO ConnectionSpec Setting ====
+//        ConnectionSpec spec = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
+//                .tlsVersions(TlsVersion.TLS_1_2, TlsVersion.TLS_1_1, TlsVersion.TLS_1_0, TlsVersion.SSL_3_0)
+//                .build();
+//        builder.connectionSpecs(Collections.singletonList(spec));
+
+        //to disable TLS fallback:
+//        builder.connectionSpecs(Arrays.asList(
+//                ConnectionSpec.MODERN_TLS, ConnectionSpec.CLEARTEXT));
+
+        //To disable cleartext connections, permitting https URLs only:
+//        builder.connectionSpecs(Arrays.asList(
+//                ConnectionSpec.MODERN_TLS, ConnectionSpec.COMPATIBLE_TLS));
+
         client  = builder.build();
+
         return client;
     }
 }
