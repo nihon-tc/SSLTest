@@ -23,12 +23,7 @@ public class RestService {
         mContext = context;
     }
 
-    /**
-     * 通信環境を確認してGET通信を行う
-     * @param callback
-     * @param headers
-     * @param httpUrl
-     */
+    // 通信環境を確認してGET通信を行う
     public Response get(final HttpUrl httpUrl, final Headers headers, final AsyncOkHttpClient.Callback callback){
         if(mContext instanceof Activity) {
             if (((Activity)mContext).isFinishing()) {
@@ -60,23 +55,7 @@ public class RestService {
         return null;
     }
 
-    /**
-     * 通信環境を確認してPOST通信を行う
-     * @param httpUrl
-     * @param requestBody
-     * @param callback
-     */
-    public void post(final HttpUrl httpUrl, final RequestBody requestBody, final AsyncOkHttpClient.Callback callback){
-        post(httpUrl, null, requestBody, callback);
-    }
-
-    /**
-     * 通信環境を確認してPOST通信を行う
-     * @param httpUrl
-     * @param headers
-     * @param requestBody
-     * @param callback
-     */
+    // 通信環境を確認してPOST通信を行う
     public void post(final HttpUrl httpUrl, final Headers headers, final RequestBody requestBody, final AsyncOkHttpClient.Callback callback){
         if(mContext instanceof Activity) {
             if (((Activity)mContext).isFinishing()) {
@@ -99,23 +78,7 @@ public class RestService {
         });
     }
 
-    /**
-     * 通信環境を確認してPOST通信を行う
-     * @param httpUrl
-     * @param json
-     * @param callback
-     */
-    public void post(final HttpUrl httpUrl, final String json, final AsyncOkHttpClient.Callback callback){
-        post(httpUrl, null, json, callback);
-
-    }
-    /**
-     * 通信環境を確認してPOST通信を行う
-     * @param httpUrl
-     * @param headers
-     * @param json
-     * @param callback
-     */
+    // 通信環境を確認してPOST通信を行う(post json)
     public void post(final HttpUrl httpUrl, final Headers headers, final String json, final AsyncOkHttpClient.Callback callback){
         if(mContext instanceof Activity) {
             if (((Activity)mContext).isFinishing()) {
@@ -151,10 +114,7 @@ public class RestService {
 
     }
 
-    /**
-     * 通信環境の確認を行う
-     * @param onAccessNetworkStateCallback
-     */
+    // 通信環境の確認を行う
     public boolean checkNetWorkConnected(final OnAccessNetworkStateCallback onAccessNetworkStateCallback){
         if(isNetWorkConnected(mContext)){
             if(onAccessNetworkStateCallback != null){
@@ -189,11 +149,7 @@ public class RestService {
         return false;
     }
 
-    /**
-     * ネットワークが接続されているかどうかを返す
-     * @param context
-     * @return
-     */
+    // ネットワークが接続されているかどうかを返す
     public boolean isNetWorkConnected(Context context){
         ConnectivityManager cm =  (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
@@ -203,9 +159,7 @@ public class RestService {
         return false;
     }
 
-    /**
-     * 通信環境がOKなときに呼ばれるイベントリスナー
-     */
+    // 通信環境がOKなときに呼ばれるイベントリスナー
     public static interface OnAccessNetworkStateCallback {
         void onAccessNetworkState();
         void onCancelNetworkState();

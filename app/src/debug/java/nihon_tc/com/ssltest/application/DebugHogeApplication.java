@@ -1,7 +1,7 @@
 package nihon_tc.com.ssltest.application;
 
 import android.content.res.AssetManager;
-import android.os.Handler;
+import android.os.Build;
 import android.os.StrictMode;
 import android.util.Log;
 import nihon_tc.com.ssltest.util.RestUtil;
@@ -15,11 +15,11 @@ import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
-import java.security.cert.Certificate;
-import java.security.cert.X509Certificate;
 import java.io.*;
 import java.security.KeyStore;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 
 /**
  * Created by kimura on 2017/04/12.
@@ -108,9 +108,6 @@ public class DebugHogeApplication extends DebugHogeDBApplication {
                         .addHeader("charset", "utf-8")
                         .setResponseCode(200);
 
-                MockResponse resB = new MockResponse()
-                        .addHeader("Content-Type", "image/png")
-                        .setResponseCode(200);
 
                 String path = request.getPath();
 
@@ -121,6 +118,9 @@ public class DebugHogeApplication extends DebugHogeDBApplication {
                     return res.setBody(readJson("fuga.json"));
                 }
                 if (path.indexOf("/maiu") != -1) {
+                    MockResponse resB = new MockResponse()
+                            .addHeader("Content-Type", "image/png")
+                            .setResponseCode(200);
                     return resB.setBody(readBinary("sample.png"));
                 }
 
@@ -227,7 +227,14 @@ public class DebugHogeApplication extends DebugHogeDBApplication {
 
             char[] serverKeyStorePassword = "android".toCharArray();
 
-            InputStream stream = assetManager.open("mystore.bks");
+            InputStream stream = null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                stream = assetManager.open("mystore.bks");
+            }
+            else{
+                stream = assetManager.open("mystore-v1.bks");
+            }
+
             KeyStore serverKeyStore = KeyStore.getInstance("BKS");
             serverKeyStore.load(stream, serverKeyStorePassword);
 

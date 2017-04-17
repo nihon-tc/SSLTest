@@ -77,6 +77,7 @@ public class AsyncOkHttpClient {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 final String content = response.body().string();
+
                 boolean isSuccessful = response.isSuccessful();
                 if (isSuccessful) {
                     mainHandler.post(new Runnable() {

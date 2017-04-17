@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="nihon_tc.com.ssltest" >
+<manifest
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        package="nihon_tc.com.ssltest">
 
+    <uses-sdk tools:overrideLibrary="com.bumptech.glide.integration.okhttp"/>
     <application
-        android:name=".application.HogeApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".activity.MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name=".application.HogeApplication"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
 
-                <category android:name="android.intent.category.LAUNCHER" />
+        <meta-data
+                android:name="nihon_tc.com.ssltest.application.LimitCacheSizeGlideModule"
+                android:value="LimitCacheSizeGlideModule"
+        />
+
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>
