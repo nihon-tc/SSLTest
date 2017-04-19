@@ -51,16 +51,13 @@ public class DebugHogeApplication extends DebugHogeDBApplication {
         }
 
         //StricModeでNW通信を許可する◎
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                .detectNetwork()
-                .build());
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();
+        StrictMode.setThreadPolicy(policy);
 
         initServer();
 
         //StricModeを元に戻す
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                .detectAll()
-                .build());
+        StrictMode.enableDefaults();
     }
 
     @Override
@@ -145,33 +142,37 @@ public class DebugHogeApplication extends DebugHogeDBApplication {
     }
 
     private String readJson(String filename) {
-        InputStream is = null;
-        BufferedReader br = null;
+        AssetManager as = getApplicationContext().getResources().getAssets();
         String json = "";
 
+        InputStream is = null;
+        BufferedReader br = null;
+
         try {
-            AssetManager as = getApplicationContext().getResources().getAssets();
             is = as.open(filename);
             br = new BufferedReader(new InputStreamReader(is));
 
             // １行ずつ読み込み、改行を付加する
+            StringBuilder sb = new StringBuilder();
             String str;
             while ((str = br.readLine()) != null) {
-                json += str + "\n";
+                sb.append(str).append("\n");
             }
+            json = sb.toString();
         } catch (Exception e) {
+            Log.e(TAG,"readJson",e);
             return "";
         } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                }
-            }
             if (br != null) {
                 try {
                     br.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
+                }
+            }
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (Exception e) {
                 }
             }
         }
@@ -179,34 +180,35 @@ public class DebugHogeApplication extends DebugHogeDBApplication {
     }
 
     private Buffer readBinary(String filename) {
-        InputStream is = null;
-        BufferedInputStream br = null;
+        AssetManager as = getApplicationContext().getResources().getAssets();
         Buffer buffer = new Buffer();
 
+        InputStream is = null;
+        BufferedInputStream br = null;
+
         try {
-            AssetManager as = getApplicationContext().getResources().getAssets();
             is = as.open(filename);
             br = new BufferedInputStream(is);
 
-            byte[] data = new byte[1024];
             int count = 0;
+            byte[] data = new byte[1024];
             while ((count = br.read(data)) != -1) {
                 buffer.write(data, 0, count);
             }
             buffer.flush();
         } catch (Exception e) {
-            return buffer;
+            Log.e(TAG,"readBinary",e);
         } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                }
-            }
             if (br != null) {
                 try {
                     br.close();
-                } catch (IOException e) {
+                } catch (Exception e) {
+                }
+            }
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (Exception e) {
                 }
             }
         }
@@ -253,7 +255,7 @@ public class DebugHogeApplication extends DebugHogeDBApplication {
             server.useHttps(sf, false);
             return true;
         } catch (Exception e) {
-            Log.e(TAG, "setUseHttps", e);
+            Log.e(TAG, "setUseHttpsWithBKS", e);
         }
 
         return false;
@@ -303,7 +305,7 @@ public class DebugHogeApplication extends DebugHogeDBApplication {
             server.useHttps(sf, false);
             return true;
         } catch (Exception e) {
-            Log.e(TAG, "setUseHttps", e);
+            Log.e(TAG, "setUseHttpsWithDER", e);
         }
 
         return false;

@@ -5,6 +5,7 @@
         package="nihon_tc.com.ssltest">
 
     <application
+            android:networkSecurityConfig="@xml/network_security_config"
             android:name=".application.DebugHogeApplication"
             tools:replace="android:name" />
 </manifest>

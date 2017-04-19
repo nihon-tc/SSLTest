@@ -1,7 +1,11 @@
 package nihon_tc.com.ssltest.application;
 
+import android.content.Context;
+import com.android.annotations.NonNull;
 import io.realm.*;
 import net.cattaka.TelnetSqliteService;
+import nihon_tc.com.ssltest.constant.Constants;
+import nihon_tc.com.ssltest.util.RealmUtils;
 
 /**
  * Created by kimura on 2017/04/12.
@@ -39,10 +43,16 @@ public class DebugHogeDBApplication extends HogeApplication {
         }
     }
 
-    //◎HogeApplicationのinitConfigを上書き
     @Override
-    protected void initConfig(){
-        Realm.init(this);
+    protected void initDBConfig() {
+        //super.initDBConfig();
+        setDefaultRealmConfigurationRemote(getApplicationContext(), Constants.REALM_MASTER, Constants.REALM_VERSION);
+    }
+
+
+    //◎HogeApplicationのinitConfigを上書き
+	public static void setDefaultRealmConfigurationRemote(final Context context, final @NonNull String filename, final int schemaVersion) {
+        Realm.init(context);
 
         SyncCredentials credentials = SyncCredentials.usernamePassword(
                 "hoge@fuga.jp", "hogehoge", false); //△本当に適当なアカウントでOK
@@ -57,9 +67,7 @@ public class DebugHogeDBApplication extends HogeApplication {
             @Override
             public void onError(ObjectServerError objectServerError) {
                 //★ここに通常接続時の記述を書いておくとベター
-                Realm.init(instance);
-                RealmConfiguration config = new RealmConfiguration.Builder().build();
-                Realm.setDefaultConfiguration(config);
+                RealmUtils.setDefaultRealmConfiguration(context,filename,schemaVersion);
             }
         });
     }

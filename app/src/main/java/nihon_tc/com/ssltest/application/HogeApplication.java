@@ -1,8 +1,8 @@
 package nihon_tc.com.ssltest.application;
 
 import android.app.Application;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
+import nihon_tc.com.ssltest.constant.Constants;
+import nihon_tc.com.ssltest.util.RealmUtils;
 
 /**
  * Created by kimura on 2017/04/12.
@@ -21,12 +21,10 @@ public class HogeApplication extends Application{
         instance = this;
 
         //追記したいDebug記述
-        initConfig();
+        initDBConfig();
     }
 
-    protected void initConfig() {
-        Realm.init(this);
-        RealmConfiguration config = new RealmConfiguration.Builder().build();
-        Realm.setDefaultConfiguration(config);
+    protected void initDBConfig() {
+        RealmUtils.setDefaultRealmConfiguration(getApplicationContext(), Constants.REALM_MASTER, Constants.REALM_VERSION);
     }
 }
