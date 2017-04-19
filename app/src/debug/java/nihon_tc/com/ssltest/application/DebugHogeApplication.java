@@ -4,7 +4,12 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.StrictMode;
 import android.util.Log;
+
+import nihon_tc.com.ssltest.util.DebugCLEARTEXT_OkHttpUtil;
+import nihon_tc.com.ssltest.util.DebugCOMPATIBLE_TLS_OkHttpUtil;
+import nihon_tc.com.ssltest.util.DebugTLSALL_OkHttpUtil;
 import nihon_tc.com.ssltest.util.RestUtil;
+import okhttp3.OkHttpClient;
 import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -58,6 +63,21 @@ public class DebugHogeApplication extends DebugHogeDBApplication {
 
         //StricModeを元に戻す
         StrictMode.enableDefaults();
+    }
+
+    int testmode = 1;
+    @Override
+    public OkHttpClient getOkhttpClient() {
+        switch (testmode){
+            case 1:
+                return DebugCLEARTEXT_OkHttpUtil.getInstance().getOkhttpClient();
+            case 2:
+                return DebugCOMPATIBLE_TLS_OkHttpUtil.getInstance().getOkhttpClient();
+            case 3:
+                return DebugTLSALL_OkHttpUtil.getInstance().getOkhttpClient();
+            default:
+                return super.getOkhttpClient();
+        }
     }
 
     @Override

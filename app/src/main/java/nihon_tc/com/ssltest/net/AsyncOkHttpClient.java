@@ -2,6 +2,8 @@ package nihon_tc.com.ssltest.net;
 
 import android.os.Handler;
 import android.os.Looper;
+
+import nihon_tc.com.ssltest.application.HogeApplication;
 import nihon_tc.com.ssltest.util.OkHttpUtil;
 import okhttp3.*;
 
@@ -13,7 +15,7 @@ public class AsyncOkHttpClient {
     }
 
     private static OkHttpClient getOkHttpClient(){
-        return OkHttpUtil.getOkhttpClient();
+        return HogeApplication.getInstance().getOkhttpClient();
     }
 
     public static Response get(HttpUrl httpUrl,Callback callback) {

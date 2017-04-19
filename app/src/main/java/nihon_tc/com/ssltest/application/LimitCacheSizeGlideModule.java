@@ -38,8 +38,9 @@ public class LimitCacheSizeGlideModule implements GlideModule {
 
     @Override
     public void registerComponents(Context context, Glide glide) {
+
         glide.register(GlideUrl.class, InputStream.class,
-                new OkHttpUrlLoader.Factory(OkHttpUtil.getOkhttpClient()));
+                new OkHttpUrlLoader.Factory(HogeApplication.getInstance().getOkhttpClient()));
         glide.register(InputStream.class, InputStream.class,
                 new PassthroughStreamLoader.Factory());
     }

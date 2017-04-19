@@ -1,6 +1,9 @@
 package nihon_tc.com.ssltest.util;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 import nihon_tc.com.ssltest.application.HogeApplication;
 import okhttp3.Cache;
 import okhttp3.ConnectionSpec;
@@ -16,12 +19,34 @@ import java.util.concurrent.TimeUnit;
  * Created by kimura on 2017/04/15.
  */
 public class OkHttpUtil {
-    private static OkHttpClient client;
+    protected final String TAG = getClass().getSimpleName();
 
-    public static OkHttpClient getOkhttpClient() {
+    protected static OkHttpClient client;
+
+    private static OkHttpUtil instance;
+
+    public static OkHttpUtil getInstance() {
+        if(instance == null){
+            instance = new OkHttpUtil();
+        }
+        return instance;
+    }
+
+    public OkHttpClient getOkhttpClient() {
         if(client != null){
             return client;
         }
+
+        OkHttpClient.Builder builder = getInstance().getBuilder();
+
+        client  = builder.build();
+
+        return client;
+    }
+
+    @NonNull
+    public OkHttpClient.Builder getBuilder() {
+        Log.d(TAG,"getBuilder");
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
@@ -43,22 +68,6 @@ public class OkHttpUtil {
         Cache cache = new Cache(cachedFile, MAX_CACHE_SIZE);
         builder.cache(cache);
 
-//== TODO ConnectionSpec Setting ====
-//        ConnectionSpec spec = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
-//                .tlsVersions(TlsVersion.TLS_1_2, TlsVersion.TLS_1_1, TlsVersion.TLS_1_0, TlsVersion.SSL_3_0)
-//                .build();
-//        builder.connectionSpecs(Collections.singletonList(spec));
-
-        //to disable TLS fallback:
-//        builder.connectionSpecs(Arrays.asList(
-//                ConnectionSpec.MODERN_TLS, ConnectionSpec.CLEARTEXT));
-
-        //To disable cleartext connections, permitting https URLs only:
-//        builder.connectionSpecs(Arrays.asList(
-//                ConnectionSpec.MODERN_TLS, ConnectionSpec.COMPATIBLE_TLS));
-
-        client  = builder.build();
-
-        return client;
+        return builder;
     }
 }
